@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Auto-tuning PID</title>
+		<title>Auto-tuning of PID controller</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -49,11 +49,49 @@
 				<!-- Main -->
 					<div id="main">
 						<div class="inner">
-							<h1>Cheat sheets</h1>
-							<span class="image main"><img src="images/pic13.jpg" alt="" /></span>
+							<h1>Auto-tuning of PID controller</h1>
 							<p>
-							A little colection of cheat sheets.
+							A proportional-integral-derivative controller (PID), is a system that allows to regulate the error of a result by means of
+							feedback, with the objective of assimilating a reference value. The PID control consists of three parameters that define
+							its behavior: the proportional value (Kp), the integral value (Ti) and the derivative value (Td), coexisting as: </br>
+							<center>
+							Gc = Kp + Ki/s + Kds 
+							</center>
+							</br>
+							The action of obtaining the values of the constants Kp, Ki and Kd is called tuning. There are several methods to
+							tune a system, including Ziegler-Nichols (maximum gain method) and Cohen-Coon. These methods, are sometimes
+							considered as tedious and imprecise, that’s why in this project, we are looking to optimize.
 							</p>
+							<h2>Problematic</h2>
+							<p>
+							To exploit the performance of a PID controller, we will explore the results obtained when self tuned when modeled
+							as a stochastic sequential decision problem.
+							</p>
+							<center>
+							<figure>
+  							<img src="images/imagesAutoTuning/picTrackSystem.PNG" alt="" style="width:30%">
+  							<figcaption>Fig.1 - Track system</figcaption>
+							</figure>
+							</center>
+							<p>
+							In Fig.1, we identify a system that needs to control its position, this system was analysed and
+							roughly approximated to the following transfer function:</br>
+							Gc = 0.2608/(s2 + 1.281s + 0.2615)
+							</br>
+							this approximation is useful for simulations. Now, we can naively simulate the control
+							of the system and stimulate it to obtain its reactions, the software used for this was Simulink from Matlab.
+							<center>
+							<figure>
+  							<img src="images/imagesAutoTuning/picControlSystem.PNG" alt="" style="width:65%">
+  							<figcaption>Fig.2 - PID control system</figcaption>
+							</figure>
+							</center>
+							</p>
+							<h2>Solution</h2>
+							<h2>Implementation</h2>
+							<ul class="actions">
+										<li><a href="#" class="button">MATLAB</a></li>
+							</ul>
 
 						</div>
 					</div>
