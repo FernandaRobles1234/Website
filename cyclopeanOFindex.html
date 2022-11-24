@@ -55,7 +55,7 @@
 							<h2>Optical Flow</h2>
 							<p>
 							Optical flow is the computed motion referent to a sequence of images. The semblance of this information will be directly linked to an algorithm’s
-							capacity defined by a variety of methods emerged along the years. In this research, we focus on gradient-based estimations.
+							capacity defined by a variety of methods emerged along the years. In this research, we focused on gradient-based estimations.
 							</p>
 
 							<h2>Cyclopean Optical Flow</h2>
@@ -66,7 +66,7 @@
 							distribution with all involved signals during the solving of optical flow. </br>
 							By having two dynamic ends of information, the algorithm's capacity increases while also presenting a 
 							new feature of constraint, granting controled flexibility. This can be translated as a mixture of sparse and 
-							dense approache, therefore, an adaptable motion validation.</br>
+							dense approaches, therefore, an adaptable motion validation.</br>
 							Also, the use of pyramidal representation was explored to enhance results, involving a dual representation of motion for a
 							smooth transition along low and high resolution.
 							</p>
@@ -79,9 +79,26 @@
 							<center>
 							<figure>
   							<img src="images/imagesOpticalFlow/picCyclopeanOpticalFLowResults.jpg" alt="" style="width:65%">
-  							<figcaption>Fig.1 - Constrained aereal cyclopean depth estimation.</figcaption>
+  							<figcaption>Fig.1 - Constrained pyramidal cyclopean depth estimation.</figcaption>
 							</figure>
 							</center>
+
+
+							<h3>Discussion:</h3>
+							
+							<p>	
+							Fig.1 is the depth estimation of two frames extracted from an aereal video of the City of Montreal.  
+							</p>
+
+
+											<ul>
+												<li>Regions with a lack of texture can't be solved.</li>
+												<li>Objects with movement (like the cars) can't be solved.</li>
+												<li>Big motions can't be solved</li>
+												Therefore:
+												<li>Incoherent results are locally minimized without merging with neighoring values.</li>
+													
+											</ul>
 
 							<h2>Implementation</h2>
 							<ul class="actions">
