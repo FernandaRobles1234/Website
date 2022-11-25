@@ -64,7 +64,7 @@
 							</p>
 							<h2>Problematic</h2>
 							<p>
-							To exploit the performance of a PID controller, we will explore the results obtained when self tuned when modeled
+							To exploit the performance of a PID controller, we will explore the results obtained when self tuned and modeled
 							as a stochastic sequential decision problem.
 							</p>
 							<center>
@@ -113,7 +113,7 @@
 							</br>
 							<p>
 							The G<sub>diff</sub> will be a value constantly compared to find its optimal magnitude, if it’s a minimum value, we approve
-							the path of gain increment so far, if Gdif f didn’t improved, that gain increment will be discarded, being u<sub>k</sub> and
+							the path of gain increment so far, if G<sub>diff</sub> didn’t improve, that gain increment will be discarded, being u<sub>k</sub> and
 							x<sub>k+1</sub> = f (x<sub>k</sub>, u<sub>k</sub>) defined.
 							</p>
 
@@ -123,7 +123,7 @@ Result: Gdiff, Ki, Kp, Kd
 <hr />
 Ki, Kp, Kd, Va, Tapprox;
 
-	while While Tapprox > Gdiff do
+	While Tapprox > Gdiff do
 		Increment gains sequentially, simulate and obtain Gdiffk;
 		if Gdiffk < min(Gdif f ) then
 			Update gains
