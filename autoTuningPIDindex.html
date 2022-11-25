@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Auto-tuning of PID controller</title>
+		<title>Auto-tuning of a PID controller</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -49,16 +49,16 @@
 				<!-- Main -->
 					<div id="main">
 						<div class="inner">
-							<h1>Auto-tuning of PID controller</h1>
+							<h1>Auto-tuning of a PID controller</h1>
 							<p>
 							A proportional-integral-derivative controller (PID), is a system that allows to regulate the error of a result by means of
 							feedback, with the objective of assimilating a reference value. The PID control consists of three parameters that define
-							its behavior: the proportional value (Kp), the integral value (Ti) and the derivative value (Td), coexisting as: </br>
+							its behavior: the proportional value (K<sub>p</sub>), the integral value (K<sub>i</sub>) and the derivative value (K<sub>d</sub>), coexisting as: </br>
 							<center>
-							Gc = Kp + Ki/s + Kds 
+							G<sub>c</sub> = K<sub>p</sub> + K<sub>i</sub>/s + K<sub>d</sub>s 
 							</center>
 							</br>
-							The action of obtaining the values of the constants Kp, Ki and Kd is called tuning. There are several methods to
+							The action of obtaining the values of the constants K<sub>p</sub>, K<sub>i</sub> and K<sub>d</sub> is called tuning. There are several methods to
 							tune a system, including Ziegler-Nichols (maximum gain method) and Cohen-Coon. These methods, are sometimes
 							considered as tedious and imprecise, that’s why in this project, we are looking to optimize.
 							</p>
@@ -76,7 +76,7 @@
 							<p>
 							In Fig.1, we identify a system that needs to control its position, this system was analysed and
 							roughly approximated to the following transfer function:</br>
-							Gc = 0.2608/(s2 + 1.281s + 0.2615)
+							G<sub>c</sub> = 0.2608/(s<sup>2</sup> + 1.281s + 0.2615)
 							</br>
 							this approximation is useful for simulations. Now, we can naively simulate the control
 							of the system and stimulate it to obtain its reactions, the software used for this was Simulink from Matlab.
@@ -88,6 +88,62 @@
 							</center>
 							</p>
 							<h2>Solution</h2>
+							<P>
+							To solve, we will use a rollout algorithm. </br>
+							The states x<sub>k</sub> are composed by the gains K<sub>i</sub>, K<sub>p</sub> and K<sub>d</sub>, and the curve resulting from their simulation. We can
+							also define the system by its reference signal V<sub>a</sub>, and a general terminal cost approximation (T<sub>approx</sub>) denoted by: </p></br>
+							<center>
+							T<sub>approx</sub>= V<sub>a</sub>
+							</center>
+							</br>
+							<p>
+							Our function to minimize is the expected value of the difference between the simulated curve and V<sub>a</sub> at every
+							state k (G<sub>diff</sub>), seen as follows: </p></br>
+							<center>
+							g<sub>k</sub>(x<sub>k</sub>, u<sub>k</sub>) = E[|Curve<sub>k</sub> − V<sub>a</sub>|] 
+							</center>
+							</br>
+							<p>
+							The control process will be defined by increasing one of this gains by a step whose distribution is denoted by
+							U (0, 10). A second gain will be increased following a look-ahead policy, meaning that a mixure of two of the gains
+							behavior of G<sub>diff</sub> will be analyzed, as seen in: </p></br>
+							<center>
+							J'<sub>k</sub> = G<sub>diff k</sub>
+							</center>
+							</br>
+							<p>
+							The G<sub>diff</sub> will be a value constantly compared to find its optimal magnitude, if it’s a minimum value, we approve
+							the path of gain increment so far, if Gdif f didn’t improved, that gain increment will be discarded, being u<sub>k</sub> and
+							x<sub>k+1</sub> = f (x<sub>k</sub>, u<sub>k</sub>) defined.
+							</p>
+
+							<pre><code>
+Algorithm 1: Approximate method
+Result: Gdiff, Ki, Kp, Kd
+<hr />
+Ki, Kp, Kd, Va, Tapprox;
+
+	while While Tapprox > Gdiff do
+		Increment gains sequentially, simulate and obtain Gdiffk;
+		if Gdiffk < min(Gdif f ) then
+			Update gains
+		else
+			Discard gains
+		end
+	end
+							</code></pre>
+							<h2>Results</h2>
+							<p>
+							This program takes an average of 5.56 seconds to find results for the PID controller.  This is due to the fact that it needs more simulations for the look-ahead method.
+							In the Fig. 3 we can see the results of one of the experiences. Here we note a better performance than the classic
+							method of Cohen-coon. 
+							<center>
+							<figure>
+  							<img src="images/imagesAutoTuning/picPIDResults.PNG" alt="" style="width:65%">
+  							<figcaption>Fig.3 - Solution for the PID parameters.</figcaption>
+							</figure>
+							</center>
+							</p>
 							<h2>Implementation</h2>
 							<ul class="actions">
 										<li><a href="https://github.com/FernandaRobles1234/Auto-Tuning-PID" class="button">MATLAB</a></li>
