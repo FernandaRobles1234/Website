@@ -48,9 +48,9 @@ let init = function () {
 
 // main animation loop - calls every 50-60 ms.
 let mainLoop = function () {
-    for (var i = 0; i < allCylinders.length; i++) {
-        allCylinders[i].rotateY(0.005);
-    }
+    //for (var i = 0; i < allCylinders.length; i++) {
+    //    allCylinders[i].rotateY(0.005);
+    //}
 
     renderer.render(scene, camera);
     requestAnimationFrame(mainLoop);

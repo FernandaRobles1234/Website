@@ -1,0 +1,176 @@
+<!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<style>
+	body {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin: 0;
+		padding: 0;
+	}
+
+	header {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-top: 0px;
+		margin-bottom: 0px;
+	}
+
+	#container {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		margin-top: -150px;
+		margin-bottom: 20px;
+	}
+
+	#container2 {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		margin-bottom: 20px;
+	}
+
+	.input-box {
+		margin-bottom: 0px;
+		z-index: 9999;
+	}
+</style>
+
+<head>
+	<title>3D Tree Recursion</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	<link rel="icon" href="images/logo.svg" type="image/x-icon">
+
+	<script src="https://cdn.jsdelivr.net/npm/three@0.131.2/build/three.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/three@0.131.2/examples/js/controls/OrbitControls.js"></script>
+	<script type="text/javascript" src="3DTreeRecursion/js/treeRecursion.js"></script>
+
+</head>
+<body class="is-preload">
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Header -->
+		<header id="header">
+			<div class="inner">
+
+				<!-- Logo -->
+				<a href="index.html" class="logo">
+					<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">Fernanda Robles</span>
+				</a>
+
+				<!-- Nav -->
+				<nav>
+					<ul>
+						<li><a href="#menu">Menu</a></li>
+					</ul>
+				</nav>
+
+			</div>
+		</header>
+
+		<!-- Menu -->
+		<nav id="menu">
+			<h2>Menu</h2>
+			<ul>
+				<li><a href="index.html">Home</a></li>
+				<li><a href="CyclopeanOFindex.html">Cyclopean Optical Flow</a></li>
+				<li><a href="autoTuningPIDindex.html">Auto-Tuning of a PID</a></li>
+				<li><a href="3DRecursionindex.html">3D Tree Recursion</a></li>
+				<li><a href="crochetindex.html">Crochet Hall of Fame</a></li>
+			</ul>
+		</nav>
+
+		<!-- Main -->
+		<div id="main">
+			<div class="inner">
+				<h1>3D Tree Recursion</h1>
+				<p>
+					This project is an assignment focused on creating a tree structure using the Three.js library and the power of recursion.
+					It aims to demonstrate the versatility of recursive algorithms and the power of the Three.js library in creating complex and intricate structures.
+				</p>
+
+				<p>
+					A few suggestions before starting,
+				</p>
+				<p>
+					- Click submit with initial values to initiate the tree.<br>
+					- Number of branches defaults to maximum capacity.<br>
+					- A recursion of depth 3 starts being computationally demanding, beware!<br>
+					- Click and drag to move the camera.<br>
+					- Click on an initiated tree to add branches!<br>
+				</p>
+				<p>
+					Enjoy!
+				</p>
+
+				<div id="container">
+					<canvas id="canvas"></canvas>
+					<label for="recursionDepth">Recursion depth:</label>
+					<input type="number" min="0" id="recursionDepth" class="input-box">
+					<label for="numberOfChildren">Number of children:</label>
+					<input type="number" min="0" id="numberOfChildren" class="input-box">
+					<label for="numberOfBranches">Number of branches:</label>
+					<input type="number" min="0" id="numberOfBranches" class="input-box">
+					<button id="submitButton" onclick="onSubmit()">Submit</button>
+				</div>
+
+				<div id="container2"></div>
+
+				<div id="errorContainer"></div>
+
+				<script type="text/javascript" src="3DTreeRecursion/source.js"></script>
+
+
+				<h2>Implementation</h2>
+				<ul class="actions">
+					<li><a href="https://github.com/FernandaRobles1234/3DTreeRecursion" class="button">Java Script</a></li>
+				</ul>
+
+			</div>
+		</div>
+
+		<!-- Footer -->
+		<footer id="footer">
+			<div class="inner">
+
+				<section>
+					<h2>Follow me!</h2>
+					<ul class="icons">
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/fernandarobles1234/" class="icon brands style2 fa-linkedin"><span class="label">LinkedIn</span></a></li>
+							<li><a href="https://github.com/FernandaRobles1234" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+					</ul>
+				</section>
+				<ul class="copyright">
+					<li>&copy; Fernanda Robles. All rights reserved</li>
+					<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+				</ul>
+			</div>
+		</footer>
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+
+</body>
+</html>
