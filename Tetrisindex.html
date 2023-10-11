@@ -81,8 +81,8 @@
 				</p>
 				<p>
 					We won't be taking that route. Instead, we'll prepare for an industry that's
-					predominantly Object-Oriented. This is a complex programming subject; however,
-					I believe this implementation does a good job of keeping it simple.
+					predominantly Object-Oriented. It's a complex programming subject; however,
+					I believe this application does a good job of keeping it simple.
 				</p>
 				<p>
 					And, once you get the hang of it, you'll find there's
@@ -102,13 +102,13 @@
 						<div class="col-6 col-12-medium">
 							<div class="col-6 col-12-medium">
 								<ol>
-									<li>Set up your development.</li>
+									<li>Set up your development</li>
 									<li>Game Initialization.</li>
-									<li>Basic Gameboard.</li>
-									<li>Tetromino implementation.</li>
-									<li>Game Logic.</li>
-									<li>User input.</li>
-									<li>Game flow.</li>
+									<li>Basic Gameboard</li>
+									<li>Tetromino implementation</li>
+									<li>Game logic</li>
+									<li>User input</li>
+									<li>Game flow</li>
 								</ol>
 							</div>
 						</div>
@@ -121,15 +121,24 @@
 
 					<div class="col-6 col-12-medium">
 						<ul>
-							<li>Polishing.</li>
-							<li>User Interface.</li>
-							<li>Testing iteration.</li>
+							<li>Polishing</li>
+							<li>User interface</li>
+							<li>Testing iteration</li>
 						</ul>
 					</div>
 
 				</section>
 
 				<h2>Implementation</h2>
+
+				<p>
+					You can find this code's C++ implementation in my GitHub:
+				</p>
+
+				<ul class="actions">
+					<li><a href="https://github.com/FernandaRobles1234/Tetris" class="button">C++</a></li>
+				</ul>
+
 				<h3>1. Set up your environment.</h3>
 
 				<p>
@@ -144,25 +153,199 @@
 	int main(int argc, char* argv[]) {
 		// Initialize SDL
 		if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-		printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
-		return 1;
+			printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
+			return 1;
 		}
 
-	return 0;
+		return 0;
+	}
+
+</code></pre>
+
+				<h3>2. Game Initialization</h3>
+
+				<h4>SDL Usage</h4>
+
+				<p>
+					At this point, SDL functions should be completely accesible &#128578;, but as SDL usage depends on other components, first we need to initialize it.
+					This way, we make sure every subsystem  (video, audio, events, etc.) is operationg properly. If anything turns out, you can handle errors gracefully instead of
+					encountering unpredictable behavior later. Also, we set up the necessary ressources for the library to work properly. It's a crucial step in using the library correctly and efficiently.
+				</p>
+
+				<p>
+					Please note, we are also creating and initializing the window where we will see tangible proof of our advancements.
+				</p>
+
+				<pre><code class='cpp'>
+
+	////////////////// Main.cpp /////////////////////
+	bool initializeSDL(SDL_Window* &window, SDL_Renderer* &renderer) {
+		// Initialize SDL
+		if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+			printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
+			return false;
+		}
+
+		// Create window
+		window = SDL_CreateWindow("Tetris",
+		SDL_WINDOWPOS_UNDEFINED,
+		SDL_WINDOWPOS_UNDEFINED,
+		SCREEN_WIDTH, SCREEN_HEIGHT,
+		SDL_WINDOW_SHOWN);
+
+		if (!window) {
+			printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
+			SDL_Quit();
+			return false;
+		}
+
+		// Initialize renderer
+		renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+		if (!renderer) {
+			printf("Renderer could not be created! SDL_Error: %s\n", SDL_GetError());
+			SDL_DestroyWindow(window);
+			SDL_Quit();
+			return false;
+		}
+
+		//For opacity
+		SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+		return true;
+	}
+
+				</code></pre>
+
+				<p>
+					To mirror this, cleaning up after using SDL is equally crucial.
+				</p>
+
+				<pre><code class='cpp'>
+	////////////////// Main.cpp /////////////////////
+
+	bool cleanupSDL(SDL_Window*& window, SDL_Renderer*& renderer) {
+		SDL_DestroyRenderer(renderer);
+		SDL_DestroyWindow(window);
+		SDL_Quit();
+
+		return true;
 	}
 
 </code></pre>
 
 
+				<h4>Game Class</h4>
+				<p>
+					Here, we introduce the concept of the "main loop" or "game loop." Essentially, it's a continuous loop responsible for calling the core mechanics of our Tetris game.
+					Some comon mechanics are:
+				</p>
+				<div class="col-6 col-12-medium">
+					<ul>
+						<li>Event handling: This method is responsible for handling user input or other external events </li>
+						<li>Update: Updates the game state. This can include moving characters, checking for collisions, updating timers, etc.</li>
+						<li>Render phases: This method is responsible for drawing the game's content on the screen.</li>
+					</ul>
+				</div>
+
+				<p>
+					As I mentioned before, we will introduce this mechanichs as characteristics of an object "Game".
+				</p>
+
+				<pre><code class='cpp'>
+
+	////////////////// Game.h /////////////////////
+	class Game {
+	public:
+		Game(SDL_Renderer* sdlRenderer); // This makes the renderer accesible to the game mechanics
+		const bool isRunning() const;  //  The main loop continues as long as the game is "running".
+		void handleEvents();
+		void update();
+		void render();
+
+	private:
+		SDL_Renderer* mSdlRenderer;
+		bool mIsRunning;
+
+		void renderWindow(); //specialized rendering function
+	};
+
+</code></pre>
+
+				<p>
+					After defining our "Game"" class, we've implemented its member functions and initialization.
+					The code is quite extensive, so I encourage you to review the "Game.cpp" file. Please focus on
+					the functions introduced so far and disregard the rest for now.
+				</p>
+
+				<p>
+					Then we can call our new code to manage correctly our game setup.
+				</p>
+
+				<pre><code class='cpp'>
+	////////////////// Main.cpp /////////////////////
+	#include &lt;SDL.h&gt;
+	#include "Game.h"
+
+	int main(int argc, char* argv[]) {
+		SDL_Window* window = nullptr;
+		SDL_Renderer* renderer = nullptr;
+
+		if (!initializeSDL(window, renderer)) {
+			return 1;
+		}
+
+		//Initialize game renderer
+		Game game(renderer);
+
+		//Game loop
+		while (game.isRunning()) {
+			game.handleEvents();
+			game.update();
+			game.render();
+		}
+
+		//clean up and free resources.
+		cleanupSDL(window, renderer);
+
+		return 0;
+	}
+
+</code></pre>
+				<h3>3. Basic Gameboard</h3>
+				<p>
+					Coming soon!
+				</p>
+
+				<h3>4. Tetromino Implementation</h3>
+				<p>
+					Coming soon!
+				</p>
+
+				<h3>5. Game Logic</h3>
+				<p>
+					Coming soon!
+				</p>
+
+				<h3>6. User Input</h3>
+				<p>
+					Coming soon!
+				</p>
+
+				<h3>7. Game Flow</h3>
+				<p>
+					Coming soon!
+				</p>
 
 				<h2>Next Steps</h2>
+				<p>
+					Coming soon!
+				</p>
 
 				<h2>Aknowledgements</h2>
+				<p>
+					Coming soon!
+				</p>
 
-				<h2>Implementation</h2>
-				<ul class="actions">
-					<li><a href="https://github.com/FernandaRobles1234/Tetris" class="button">C++</a></li>
-				</ul>
+
 
 			</div>
 		</div>
