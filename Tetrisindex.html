@@ -5,122 +5,203 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
-	<head>
-		<title>Tetris</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-		<link rel="icon" href="images/logo.svg" type="image/x-icon">
-	</head>
-	<body class="is-preload">
-		<!-- Wrapper -->
-			<div id="wrapper">
+<head>
+	<title>Tetris</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	<link rel="icon" href="images/logo.svg" type="image/x-icon">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/default.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+</head>
+<body class="is-preload">
+	<!-- Wrapper -->
+	<div id="wrapper">
 
-				<!-- Header -->
-					<header id="header">
-						<div class="inner">
+		<!-- Header -->
+		<header id="header">
+			<div class="inner">
 
-							<!-- Logo -->
-								<a href="index.html" class="logo">
-									<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">Fernanda Robles</span>
-								</a>
+				<!-- Logo -->
+				<a href="index.html" class="logo">
+					<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">Fernanda Robles</span>
+				</a>
 
-						</div>
-					</header>
+			</div>
+		</header>
 
 
-				<!-- Main -->
-					<div id="main">
-						<div class="inner">
-							<h1>Stacking Success: Introduction to Game Development Using Tetris</h1>
-							<p>
-								Fueled by my passion for C++ and the urge to learn more, I've stepped into the vibrant world of video game development.
-								What intrigues me the most is the diversity of problems we can tackle due to the virtual nature of video games.
-								This field truly offers a playground for anyone looking to deepen their understanding of software development,
-								since various approaches at different levels stand out more here than in other domains.
-							</p>
+		<!-- Main -->
+		<div id="main">
+			<div class="inner">
+				<h1>Stacking Success: Introduction to Game Development Using Tetris</h1>
+				<p>
+					Fueled by my passion for C++ and the urge to learn more, I've stepped into the vibrant world of video game development.
+					What intrigues me the most is the diversity of problems we can tackle due to the virtual nature of video games.
+					This field truly offers a playground for anyone looking to deepen their understanding of software development,
+					since various approaches at different levels stand out more here than in other domains.
+				</p>
 
-							<p>
-								With a surge of enthusiasm, I took on my first game project, which, as you can discern, is Tetris!
+				<p>
+					With a surge of enthusiasm, I took on my first game project, which, as you can discern, is Tetris!
 
-							</p>
+				</p>
 
-							<p>
-								And my aim is to bring you along on my journey &#128512; and convey the approachability I experienced during this introduction.
-							</p>
+				<p>
+					And my aim is to bring you along on my journey &#128512; and convey the approachability I experienced during this introduction.
+				</p>
 
-							<h2>Tetris</h2>
-							<p>
-								Explain problematic.
-							</p>
+				<h2>Tetris</h2>
+				<p>
+					Explain problematic.
+				</p>
 
-							<h2>Lets get started</h2>
-							<p>
-								In this tutorial, I'll be walking you through the process of creating an interactive application using Visual Studio
-								in object-oriented programming. To facilitate the development, we'll use
-								the Simple DirectMedia Layer (SDL), a library to
-								give developers intimate, low-level access to elements such as audio, keyboard, mouse, joystick, and graphics.
-								But what's development without robust testing? Hence, we'll adopt a debugging-oriented approach throughout.
-								Dive in and let's begin this exciting journey!
+				<h2>Lets get started</h2>
+				<p>
+					In this tutorial, I'll be walking you through the process of creating an interactive application using Visual Studio
+					in object-oriented programming. To facilitate the development, we'll use
+					the Simple DirectMedia Layer (SDL), a library to
+					give developers intimate, low-level access to elements such as audio, keyboard, mouse, joystick, and graphics.
+					But what's development without robust testing? Hence, we'll adopt a debugging-oriented approach throughout.
+					Dive in and let's begin this exciting journey!
 
-							</p>
-							<p>
-								I won't be talking about how to install SLD, but <a href="https://www.youtube.com/watch?v=13AEnd8XB70&ab_channel=TheInteractiveStudio">here</a> is the video where I learned!
-							</p>
-							<h2>Implementation design</h2>
-							Designing our game is the foundational step. It sets the stage because all the programming
-							will be centered around it. Given that Tetris is a widely-analyzed challenge,
-							many solutions have been proposed over the years. One of the most straightforward methods to
-							tackle it is by writing the code linearly, leading to a single file for our entire project.
+				</p>
+				<p>
+					I won't be talking about how to install SLD, but <a href="https://www.youtube.com/watch?v=13AEnd8XB70&ab_channel=TheInteractiveStudio">here</a> is the video where I learned!
+				</p>
 
-							However, we won't be taking that route. Instead, we'll prepare for an industry that's
-							predominantly Object-Oriented.
 
-							At first glance, it might seem complex, but once you get the hang of it, you'll find there's 
-							a comprehensive methodology underlying it that can truly make our life easier as programmers.
+				<h2>Implementation design</h2>
+				<p>
+					Designing our game is the foundational step. It sets the stage because all the programming
+					will revolve around it. Given that Tetris is a widely-analyzed challenge,
+					many solutions have been proposed over the years. One of the most straightforward methods to
+					tackle it is by writing the code in-line, leading to a single file for our entire project.
+				</p>
+				<p>
+					We won't be taking that route. Instead, we'll prepare for an industry that's
+					predominantly Object-Oriented. This is a complex programming subject; however,
+					I believe this implementation does a good job of keeping it simple.
+				</p>
+				<p>
+					And, once you get the hang of it, you'll find there's
+					a comprehensive methodology underlying Object-Oriented-Programming (OOP) that can truly make our life easier as programmers.
+				</p>
 
-							<h2>Implementation</h2>
+				<section>
+					<h3>Steps</h3>
 
-							<h2>Next Steps</h2>
+					<p>
+						The following list outlines some of the most basic tasks a game can entail. Organized sequentially, it ensures that our
+						progression through each task remains independent of subsequent ones. This structure guarantees that even if we pause at any stage,
+						we'll have a somewhat complete exercise to reflect upon and showcase &#128578;
+					</p>
 
-							<h2>Aknowledgements</h2>
-
-							<h2>Implementation</h2>
-							<ul class="actions">
-								<li><a href="https://github.com/FernandaRobles1234/Tetris" class="button">C++</a></li>
-							</ul>
-
+					<div class="row">
+						<div class="col-6 col-12-medium">
+							<div class="col-6 col-12-medium">
+								<ol>
+									<li>Set up your development.</li>
+									<li>Game Initialization.</li>
+									<li>Basic Gameboard.</li>
+									<li>Tetromino implementation.</li>
+									<li>Game Logic.</li>
+									<li>User input.</li>
+									<li>Game flow.</li>
+								</ol>
+							</div>
 						</div>
 					</div>
 
-				<!-- Footer -->
-					<footer id="footer">
-						<div class="inner">
-						
-							<section>
-								<h2>Follow me!</h2>
-								<ul class="icons">
-									<ul class="icons">
-									<li><a href="https://www.linkedin.com/in/fernandarobles1234/" class="icon brands style2 fa-linkedin"><span class="label">LinkedIn</span></a></li>
-									<li><a href="https://github.com/FernandaRobles1234" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
-								</ul>
-								</ul>
-							</section>
-							<ul class="copyright">
-								<li>&copy; Fernanda Robles. All rights reserved</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-							</ul>
-						</div>
-					</footer>
+					<p>
+						There are also some steps that could lead to a more polished result, but I haven't explored them myself. Some examples:
+					</p>
+
+
+					<div class="col-6 col-12-medium">
+						<ul>
+							<li>Polishing.</li>
+							<li>User Interface.</li>
+							<li>Testing iteration.</li>
+						</ul>
+					</div>
+
+				</section>
+
+				<h2>Implementation</h2>
+				<h3>1. Set up your environment.</h3>
+
+				<p>
+					After we install SDL as seen <a href="https://www.youtube.com/watch?v=13AEnd8XB70&ab_channel=TheInteractiveStudio">here</a>, we can confirm with the following snippet that we can use it.
+				</p>
+
+				<pre><code class='cpp'>
+
+	////////////////// Main.cpp /////////////////////
+	#include &lt;SDL.h&gt;
+
+	int main(int argc, char* argv[]) {
+		// Initialize SDL
+		if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+		printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
+		return 1;
+		}
+
+	return 0;
+	}
+
+</code></pre>
+
+
+
+				<h2>Next Steps</h2>
+
+				<h2>Aknowledgements</h2>
+
+				<h2>Implementation</h2>
+				<ul class="actions">
+					<li><a href="https://github.com/FernandaRobles1234/Tetris" class="button">C++</a></li>
+				</ul>
 
 			</div>
+		</div>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+		<!-- Footer -->
+		<footer id="footer">
+			<div class="inner">
 
-	</body>
+				<section>
+					<h2>Follow me!</h2>
+					<ul class="icons">
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/fernandarobles1234/" class="icon brands style2 fa-linkedin"><span class="label">LinkedIn</span></a></li>
+							<li><a href="https://github.com/FernandaRobles1234" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+					</ul>
+				</section>
+				<ul class="copyright">
+					<li>&copy; Fernanda Robles. All rights reserved</li>
+					<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+				</ul>
+			</div>
+		</footer>
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script>
+		document.addEventListener('DOMContentLoaded', (event) => {
+			document.querySelectorAll('pre code').forEach((block) => {
+				hljs.highlightElement(block);
+			});
+		});
+	</script>
+
+</body>
 </html>
