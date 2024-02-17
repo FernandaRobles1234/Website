@@ -36,35 +36,78 @@
 		<div id="main">
 			<div class="inner">
 				<h1>SpaceBeat Checker</h1>
-
 				<center>
-				<p>
-
 					<iframe width="560" height="315" src="https://www.youtube.com/embed/UMu_MWFd4xM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-				</p>
 				</center>
 
-				
 
+				<h2>Motivation</h2>
 
-
-				<h2>Class Architecture.</h2>
 				<p>
-					<center>
-						<figure>
-							<img src="images/imagesSpaceBeatChecker/picNodeHierarchy.png" alt="" style="width:65%">
-							<figcaption>Fig.1 - Node class hierarchy.</figcaption>
-						</figure>
-					</center>
-
-					<center>
-						<figure>
-							<img src="images/imagesSpaceBeatChecker/picFunctionPropagation.png" alt="" style="width:40%">
-							<figcaption>Fig.2 - Function propagation.</figcaption>
-						</figure>
-					</center>
+					SpaceBeat Checker is the result of a 3 month production for the "Develop at Ubisoft 2023" program. The prompt we were given for this challenge was: a 1 button game with the theme of "crowded spaces".
 				</p>
+
+				<p>
+					Combos in fighting games are intricately linked to the precise timing and sequence of button presses and they were an inspiration to
+					use timing in SpaceBeat Checker to unblock different actions.
+					Players need to master not just the correct order of moves but also the exact timing needed to chain these moves seamlessly.
+					With rhythm, a natural awareness of timing will welcome the players to unlock a multitude of actions using a single button, adding a layer of depth and strategy to gameplay.
+				</p>
+
+				<h2>Challenges</h2>
+				<p>
+					Short productions and rhythm games come with their own set of challenges. We also had to create with the limitation of not using an engine,
+					but with the tools of a given API.
+				</p>
+
+				<p>
+					Managing rhythm without the proper tools haves some limitations. The computer's counters are relative and they wont necessarly be coherent with the
+					song they are linked to given that song's usually play in a different thread.
+
+
+				</p>
+
+
+				<h2>Node Class Architecture</h2>
+
+				<p>
+					I inmediatly took a naive inpiration from Godot's Node structure because I like it. It is a really intuitive way to easily control the
+					information of objects that are linked, given that a parent node will be given the responsability to manage it.
+
+					Some of the nodes I implemented can be seen in Fig.1.
+				</p>
+
+				<center>
+					<figure>
+						<img src="images/imagesSpaceBeatChecker/picNodeHierarchy.png" alt="" style="width:65%">
+						<figcaption>Fig.1 - Node class hierarchy.</figcaption>
+					</figure>
+				</center>
+
+
+				<ul>
+					Nodes:
+					<li>Will always have a transform component.</li>
+					<li>Will always be renderable.</li>
+					<li>Will always transfer its transform component to its children.</li>
+					<li>Will always transfer its update calls.</li>
+					<li>Will always transfer its render calls.</li>
+					<li>Will always transfer its render calls.</li>
+					<li>Will always do memory management of their children upon destruction.</li>
+
+					Limitations:
+					<li>Only one child per type is allowed.</li>
+					<li>Systems processing can't transfer beyond the most immediate generation of children. (As seen in Fig.2)</li>
+
+
+				</ul>
+
+				<center>
+					<figure>
+						<img src="images/imagesSpaceBeatChecker/picFunctionPropagation.png" alt="" style="width:40%">
+						<figcaption>Fig.2 - Function propagation.</figcaption>
+					</figure>
+				</center>
 
 				<h2>Lets get started</h2>
 				<p>
