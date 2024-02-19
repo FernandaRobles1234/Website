@@ -72,7 +72,8 @@
 
 				<p>
 					I inmediatly took a naive inpiration from Godot's Node structure because I like it. It is a really intuitive way to easily control the
-					information of objects that are linked, given that a parent node will be given the responsability to manage it.
+					information of objects that are linked, given that a parent node will be given the responsability to manage it. The information that will be
+					shared is mainly spatial information, like position, scale, etc.
 
 					Some of the nodes I implemented can be seen in Fig.1.
 				</p>
@@ -92,7 +93,6 @@
 					<li>Will always transfer its transform component to its children.</li>
 					<li>Will always transfer its update calls.</li>
 					<li>Will always transfer its render calls.</li>
-					<li>Will always transfer its render calls.</li>
 					<li>Will always do memory management of their children upon destruction.</li>
 
 					Limitations:
@@ -109,10 +109,55 @@
 					</figure>
 				</center>
 
-				<h2>Lets get started</h2>
+				<h2>Song Node class</h2>
+
 				<p>
-					Coming soon!
+					After ensuring the song was in the right buffer frecuancy: To tackle the timer coherence problem, we analized the drift between a computer's timer and a human tracking song's timer (us pressing to the apparent beat of the song)
+					as seen in Fig.4.
 				</p>
+
+				<center>
+					<figure>
+						<img src="images/imagesSpaceBeatChecker/picDrift.png" alt="" style="width:80%">
+						<figcaption>Fig.4 - Drift between computer's beat count and the song's beat count.</figcaption>
+					</figure>
+				</center>
+
+				<p>
+					As we calculated the time drift as (Song's count - Computer's count), and the difference is dominantly positive, we can conclude the song's count is delaying in comparaison to the computer's count.
+				</p>
+
+				<p>
+					But hope is not lost! We can also identify, at the beggining of the song the drift is almost negligable within the range of 0 s and 40 s! If we simulate a loop within this range,
+					we find the results from Fig.5.
+				</p>
+
+				<center>
+					<figure>
+						<img src="images/imagesSpaceBeatChecker/picCorrectedDrift.png" alt="" style="width:80%">
+						<figcaption>Fig.5 - Corrected Drift.</figcaption>
+					</figure>
+				</center>
+				<p>
+					These results indicate that the margin of error is probably introduced by the human factor (the song's count is produced by us).
+				</p>
+				<p>
+					With this information, we took the following design desition, we'll keep the song tracks within a range of 0 s to 16 s, and loop over them. This way, we can reinitialize counters
+					and profit from the fact that at the beggining, the drift is really small.
+
+					This means that each song will need it's own counter so we can maximize coherence between them.
+				</p>
+
+				<p>
+					The Song Node is not an Entity Node, because it behaves differently. They can't be processed with the same systems, althought they share some behaviors given their Node natrue.
+				</p>
+
+				<center>
+					<figure>
+						<img src="images/imagesSpaceBeatChecker/picSongNode.png" alt="" style="width:25%">
+						<figcaption>Fig.6 - Song Node.</figcaption>
+					</figure>
+				</center>
 
 				<h2>Implementation</h2>
 
