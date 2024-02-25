@@ -38,124 +38,128 @@
 				<h1>BeatSpace Checker</h1>
 				<center>
 					<iframe width="560" height="315" src="https://www.youtube.com/embed/UMu_MWFd4xM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 				</center>
-
-
-				<h2>Motivation</h2>
-
-				<p>
-					BeatSpace Checker is the result of a 3-month production for the "Develop at Ubisoft 2023" program. 
-					The prompt for this challenge was to create a 1-button game with the theme of "crowded spaces".
-				</p>
-
-				<p>
-					Drawing inspiration from combos in fighting games, BeatSpace Checker requires players to master precise timing needed to chain these moves seamlessly. 
-					By incorporating rhythm, the game introduces a natural awareness of timing that allows players to unlock a multitude of actions using a single button, 
-					adding a layer of depth and strategy to the gameplay.
-				</p>
-
-			
-				<h2>Node Class Architecture</h2>
-
-				<p>
-					I immediately drew inspiration from Godot's Node structure, 
-					which I find intuitive for controlling the information of linked objects. 
-					In BeatSpace Checker, I implemented nodes to manage shared spatial information 
-					like position and scale, similar to the structure seen in Fig.1.
-				</p>
-
 				<center>
-					<figure>
-						<img src="images/imagesSpaceBeatChecker/picNodeHierarchy.png" alt="" style="width:65%">
-						<figcaption>Fig.1 - Node class hierarchy.</figcaption>
-					</figure>
+					<a href="https://ditacool1234.itch.io/beatspace-checker">Click here to visit Itch.io and download!</a>
 				</center>
 
 
-				<ul>
-					Nodes:
-					<li>Will always have a transform component.</li>
-					<li>Will always be renderable.</li>
-					<li>Will always transfer its transform component to its children.</li>
-					<li>Will always transfer its update calls.</li>
-					<li>Will always transfer its render calls.</li>
-					<li>Will always do memory management of their children upon destruction.</li>
+						<h2>Motivation</h2>
 
-					Limitations:
-					<li>Only one child per type is allowed.</li>
-					<li>Systems processing can't transfer beyond the most immediate generation of children. (As seen in Fig.2)</li>
+						<p>
+							BeatSpace Checker is the result of a 3-month production for the "Develop at Ubisoft 2023" program.
+							The prompt for this challenge was to create a 1-button game with the theme of "crowded spaces".
+						</p>
 
-
-				</ul>
-
-				<center>
-					<figure>
-						<img src="images/imagesSpaceBeatChecker/picFunctionPropagation.png" alt="" style="width:40%">
-						<figcaption>Fig.2 - Function propagation.</figcaption>
-					</figure>
-				</center>
-
-				<h2>Song Node class</h2>
-
-				<p>
-					To address a timer coherence problem, we analyzed the drift between a computer's timer and a human tracking the song's timer 
-					(pressing to the apparent beat of the song), as depicted in Fig.4.
-				</p>
-
-				<center>
-					<figure>
-						<img src="images/imagesSpaceBeatChecker/picDrift.png" alt="" style="width:80%">
-						<figcaption>Fig.4 - Drift between computer's beat count and the song's beat count.</figcaption>
-					</figure>
-				</center>
-
-				<p>
-					As we calculated the time drift as (Song's count - Computer's count), and the difference is dominantly positive, we can conclude the song's count is delaying in comparaison to the computer's count.
-				</p>
-
-				<p>
-					But hope is not lost! We can also identify, at the beggining of the song the drift is almost negligable within the range of 0 s and 40 s! If we simulate a loop within this range (0 s to 16s),
-					we find the results from Fig.5.
-				</p>
-
-				<center>
-					<figure>
-						<img src="images/imagesSpaceBeatChecker/picCorrectedDrift.png" alt="" style="width:80%">
-						<figcaption>Fig.5 - Corrected Drift.</figcaption>
-					</figure>
-				</center>
-				<p>
-					Based on this information, we made the following design decision: we will keep the song tracks within a range of 0 s to 16 s and loop over them. This approach allows us to reinitialize counters and take advantage of the fact that at the beginning, the drift is very small.
-
-					This means that each sound source will need its own counter so we can maximize coherence between them.
-				</p>
-
-				<p>
-					The Song Node is not an Entity Node, because it behaves differently. They can't be processed with the same systems, althought they share some behaviors given their Node nature.
-				</p>
-
-				<center>
-					<figure>
-						<img src="images/imagesSpaceBeatChecker/picSongNode.png" alt="" style="width:20%">
-						<figcaption>Fig.6 - Song Node.</figcaption>
-					</figure>
-				</center>
-
-				<h2>Implementation</h2>
-
-				<p>
-					Coming Soon!
-				</p>
+						<p>
+							Drawing inspiration from combos in fighting games, BeatSpace Checker requires players to master precise timing needed to chain these moves seamlessly.
+							By incorporating rhythm, the game introduces a natural awareness of timing that allows players to unlock a multitude of actions using a single button,
+							adding a layer of depth and strategy to the gameplay.
+						</p>
 
 
-				<h3>1. Coming Soon!</h3>
+						<h2>Node Class Architecture</h2>
 
-				<p>
-					Coming Soon!
-				</p>
+						<p>
+							I immediately drew inspiration from Godot's Node structure,
+							which I find intuitive for controlling the information of linked objects.
+							In BeatSpace Checker, I implemented nodes to manage shared spatial information
+							like position and scale, similar to the structure seen in Fig.1.
+						</p>
+
+						<center>
+							<figure>
+								<img src="images/imagesSpaceBeatChecker/picNodeHierarchy.png" alt="" style="width:65%">
+								<figcaption>Fig.1 - Node class hierarchy.</figcaption>
+							</figure>
+						</center>
 
 
-				<pre><code class='cpp'>
+						<ul>
+							Nodes:
+							<li>Will always have a transform component.</li>
+							<li>Will always be renderable.</li>
+							<li>Will always transfer its transform component to its children.</li>
+							<li>Will always transfer its update calls.</li>
+							<li>Will always transfer its render calls.</li>
+							<li>Will always do memory management of their children upon destruction.</li>
+
+							Limitations:
+							<li>Only one child per type is allowed.</li>
+							<li>Systems processing can't transfer beyond the most immediate generation of children. (As seen in Fig.2)</li>
+
+
+						</ul>
+
+						<center>
+							<figure>
+								<img src="images/imagesSpaceBeatChecker/picFunctionPropagation.png" alt="" style="width:40%">
+								<figcaption>Fig.2 - Function propagation.</figcaption>
+							</figure>
+						</center>
+
+						<h2>Song Node class</h2>
+
+						<p>
+							To address a timer coherence problem, we analyzed the drift between a computer's timer and a human tracking the song's timer
+							(pressing to the apparent beat of the song), as depicted in Fig.4.
+						</p>
+
+						<center>
+							<figure>
+								<img src="images/imagesSpaceBeatChecker/picDrift.png" alt="" style="width:80%">
+								<figcaption>Fig.4 - Drift between computer's beat count and the song's beat count.</figcaption>
+							</figure>
+						</center>
+
+						<p>
+							As we calculated the time drift as (Song's count - Computer's count), and the difference is dominantly positive, we can conclude the song's count is delaying in comparaison to the computer's count.
+						</p>
+
+						<p>
+							But hope is not lost! We can also identify, at the beggining of the song the drift is almost negligable within the range of 0 s and 40 s! If we simulate a loop within this range (0 s to 16s),
+							we find the results from Fig.5.
+						</p>
+
+						<center>
+							<figure>
+								<img src="images/imagesSpaceBeatChecker/picCorrectedDrift.png" alt="" style="width:80%">
+								<figcaption>Fig.5 - Corrected Drift.</figcaption>
+							</figure>
+						</center>
+						<p>
+							Based on this information, we made the following design decision: we will keep the song tracks within a range of 0 s to 16 s and loop over them. This approach allows us to reinitialize counters and take advantage of the fact that at the beginning, the drift is very small.
+
+							This means that each sound source will need its own counter so we can maximize coherence between them.
+						</p>
+
+						<p>
+							The Song Node is not an Entity Node, because it behaves differently. They can't be processed with the same systems, althought they share some behaviors given their Node nature.
+						</p>
+
+						<center>
+							<figure>
+								<img src="images/imagesSpaceBeatChecker/picSongNode.png" alt="" style="width:20%">
+								<figcaption>Fig.6 - Song Node.</figcaption>
+							</figure>
+						</center>
+
+						<h2>Implementation</h2>
+
+						<p>
+							Coming Soon!
+						</p>
+
+
+						<h3>1. Coming Soon!</h3>
+
+						<p>
+							Coming Soon!
+						</p>
+
+
+						<pre><code class='cpp'>
 	////////////////// Main.cpp /////////////////////
 
 	bool cleanupSDL(SDL_Window*& window, SDL_Renderer*& renderer) {
@@ -170,18 +174,18 @@
 
 
 
-				<h2>Next Steps</h2>
-				<p>
-					Coming soon!
-				</p>
+						<h2>Next Steps</h2>
+						<p>
+							Coming soon!
+						</p>
 
-				<h2>Aknowledgements</h2>
-				<p>
-					Coming soon!
-				</p>
+						<h2>Aknowledgements</h2>
+						<p>
+							Coming soon!
+						</p>
 
 
-			</div>
+</div>
 		</div>
 
 		<!-- Footer -->
